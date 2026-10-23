@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="100%" height="100%" style="background:#ffffff; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.8" fill="#e2e8f0" />
+    </pattern>
+    <!-- Arrow marker for LED -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#16a34a" />
+    </marker>
+    <!-- Drop Shadow Filter -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12" flood-color="#0f172a"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+  <rect width="100%" height="100%" fill="url(#grid)" />
+
+  <!-- Title Block -->
+  <g id="title-block">
+    <rect x="30" y="25" width="1040" height="65" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="50" y="58" font-size="22" font-weight="700" fill="#0f172a">4-Key Combination Lock Using 555 Timer IC</text>
+    <text x="50" y="77" font-size="13" font-weight="500" fill="#64748b">Monostable Multivibrator Mode | 5V DC Supply | Pure Hardware Logic</text>
+    <text x="940" y="52" font-size="12" font-weight="600" fill="#2563eb" text-anchor="end">Rev: 1.0.0</text>
+    <text x="940" y="72" font-size="12" font-weight="500" fill="#64748b" text-anchor="end">Status: Verified on Breadboard</text>
+  </g>
+
+  <!-- Power Rails -->
+  <!-- VCC Rail (+5V) -->
+  <path d="M 60 120 L 1040 120" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
+  <rect x="60" y="105" width="70" height="24" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="95" y="122" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="middle">+5V (VCC)</text>
+
+  <!-- GND Rail (0V) -->
+  <path d="M 60 740 L 1040 740" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+  <rect x="60" y="730" width="70" height="24" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="95" y="747" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">GND (0V)</text>
+
+  <!-- ==================== 555 TIMER IC CHIP ==================== -->
+  <g id="ic-555" filter="url(#shadow)">
+    <!-- IC Body -->
+    <rect x="520" y="250" width="220" height="340" rx="10" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+    <!-- IC Notch (indicates pin 1 top side) -->
+    <path d="M 610 250 A 20 20 0 0 0 650 250" fill="none" stroke="#475569" stroke-width="2"/>
+    <!-- Chip Label -->
+    <text x="630" y="410" font-size="24" font-weight="800" fill="#f8fafc" text-anchor="middle" letter-spacing="1.5">NE555</text>
+    <text x="630" y="435" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">TIMER IC (DIP-8)</text>
+
+    <!-- Pin Outlines & Labels (Drawn functionally for crystal clear schematic flow) -->
+    <!-- Pin 8 (VCC) - Top right -->
+    <line x1="630" y1="250" x2="630" y2="120" stroke="#dc2626" stroke-width="2"/>
+    <circle cx="630" cy="120" r="4" fill="#dc2626"/>
+    <text x="640" y="275" font-size="13" font-weight="700" fill="#f87171">8 VCC</text>
+
+    <!-- Pin 1 (GND) - Bottom -->
+    <line x1="630" y1="590" x2="630" y2="740" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="630" cy="740" r="4" fill="#2563eb"/>
+    <text x="640" y="580" font-size="13" font-weight="700" fill="#60a5fa">1 GND</text>
+
+    <!-- Pin 4 (RESET) - Left Top -->
+    <line x1="520" y1="290" x2="430" y2="290" stroke="#334155" stroke-width="2"/>
+    <circle cx="520" cy="290" r="3" fill="#cbd5e1"/>
+    <text x="532" y="295" font-size="13" font-weight="700" fill="#f8fafc">4 RESET</text>
+    <text x="585" y="290" font-size="10" font-weight="700" fill="#94a3b8">Active-LOW</text>
+
+    <!-- Pin 2 (TRIGGER) - Left Middle -->
+    <line x1="520" y1="360" x2="230" y2="360" stroke="#334155" stroke-width="2"/>
+    <circle cx="520" cy="360" r="3" fill="#cbd5e1"/>
+    <text x="532" y="365" font-size="13" font-weight="700" fill="#f8fafc">2 TRIG</text>
+    <text x="580" y="360" font-size="10" font-weight="700" fill="#94a3b8">&lt; 1/3 Vcc</text>
+
+    <!-- Pin 6 (THRESHOLD) - Right Top -->
+    <line x1="740" y1="310" x2="820" y2="310" stroke="#334155" stroke-width="2"/>
+    <circle cx="740" cy="310" r="3" fill="#cbd5e1"/>
+    <text x="728" y="315" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">6 THRESH</text>
+
+    <!-- Pin 7 (DISCHARGE) - Right Middle -->
+    <line x1="740" y1="370" x2="820" y2="370" stroke="#334155" stroke-width="2"/>
+    <circle cx="740" cy="370" r="3" fill="#cbd5e1"/>
+    <text x="728" y="375" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">7 DISCH</text>
+
+    <!-- Pin 3 (OUTPUT) - Right Bottom -->
+    <line x1="740" y1="470" x2="880" y2="470" stroke="#334155" stroke-width="2"/>
+    <circle cx="740" cy="470" r="3" fill="#cbd5e1"/>
+    <text x="728" y="475" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">3 OUT</text>
+
+    <!-- Pin 5 (CONTROL) - Left Bottom -->
+    <line x1="520" y1="520" x2="480" y2="520" stroke="#334155" stroke-width="2"/>
+    <circle cx="520" cy="520" r="3" fill="#cbd5e1"/>
+    <text x="532" y="525" font-size="13" font-weight="700" fill="#f8fafc">5 CTRL</text>
+  </g>
+
+  <!-- ==================== DECOUPLING CAP C3 (Across Rails) ==================== -->
+  <g id="cap-c3">
+    <line x1="160" y1="120" x2="160" y2="380" stroke="#334155" stroke-width="2"/>
+    <circle cx="160" cy="120" r="4" fill="#dc2626"/>
+    <!-- Capacitor symbol -->
+    <line x1="145" y1="380" x2="175" y2="380" stroke="#0f172a" stroke-width="2.5"/>
+    <line x1="145" y1="390" x2="175" y2="390" stroke="#0f172a" stroke-width="2.5"/>
+    <line x1="160" y1="390" x2="160" y2="740" stroke="#334155" stroke-width="2"/>
+    <circle cx="160" cy="740" r="4" fill="#2563eb"/>
+    <text x="180" y="380" font-size="13" font-weight="700" fill="#0f172a">C3</text>
+    <text x="180" y="396" font-size="11" font-weight="600" fill="#64748b">100 nF (104)</text>
+    <text x="180" y="412" font-size="10" font-weight="500" fill="#94a3b8">Rail Decoupling</text>
+  </g>
+
+  <!-- ==================== TRIGGER NETWORK: PIN 2 ==================== -->
+  <g id="trigger-subsystem">
+    <!-- Pull-up Resistor R1 (10 kΩ) -->
+    <line x1="230" y1="120" x2="230" y2="180" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="120" r="4" fill="#dc2626"/>
+    <!-- Resistor R1 Box -->
+    <rect x="220" y="180" width="20" height="50" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+    <text x="250" y="202" font-size="13" font-weight="700" fill="#0f172a">R1</text>
+    <text x="250" y="218" font-size="11" font-weight="600" fill="#64748b">10 kΩ</text>
+    <line x1="230" y1="230" x2="230" y2="360" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="360" r="4" fill="#0f172a"/>
+
+    <!-- Key Switch Chain Header -->
+    <rect x="180" y="390" width="100" height="24" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+    <text x="230" y="406" font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">4-KEY SERIES</text>
+
+    <!-- Switch K1 -->
+    <line x1="230" y1="360" x2="230" y2="425" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="425" r="3" fill="#0f172a"/>
+    <line x1="230" y1="425" x2="242" y2="445" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="230" cy="455" r="3" fill="#0f172a"/>
+    <text x="250" y="445" font-size="12" font-weight="700" fill="#0f172a">K1</text>
+
+    <!-- Switch K2 -->
+    <line x1="230" y1="455" x2="230" y2="495" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="495" r="3" fill="#0f172a"/>
+    <line x1="230" y1="495" x2="242" y2="515" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="230" cy="525" r="3" fill="#0f172a"/>
+    <text x="250" y="515" font-size="12" font-weight="700" fill="#0f172a">K2</text>
+
+    <!-- Switch K3 -->
+    <line x1="230" y1="525" x2="230" y2="565" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="565" r="3" fill="#0f172a"/>
+    <line x1="230" y1="565" x2="242" y2="585" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="230" cy="595" r="3" fill="#0f172a"/>
+    <text x="250" y="585" font-size="12" font-weight="700" fill="#0f172a">K3</text>
+
+    <!-- Switch K4 -->
+    <line x1="230" y1="595" x2="230" y2="635" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="635" r="3" fill="#0f172a"/>
+    <line x1="230" y1="635" x2="242" y2="655" stroke="#0f172a" stroke-width="2.5"/>
+    <circle cx="230" cy="665" r="3" fill="#0f172a"/>
+    <text x="250" y="655" font-size="12" font-weight="700" fill="#0f172a">K4</text>
+
+    <!-- Connection from K4 to Ground -->
+    <line x1="230" y1="665" x2="230" y2="740" stroke="#334155" stroke-width="2"/>
+    <circle cx="230" cy="740" r="4" fill="#2563eb"/>
+    <text x="240" y="725" font-size="10" font-weight="600" fill="#2563eb">To GND</text>
+  </g>
+
+  <!-- ==================== RESET / TRAP NETWORK: PIN 4 ==================== -->
+  <g id="reset-subsystem">
+    <!-- Pull-up Resistor R2 (10 kΩ) -->
+    <line x1="430" y1="120" x2="430" y2="180" stroke="#334155" stroke-width="2"/>
+    <circle cx="430" cy="120" r="4" fill="#dc2626"/>
+    <!-- Resistor R2 Box -->
+    <rect x="420" y="180" width="20" height="50" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+    <text x="448" y="202" font-size="13" font-weight="700" fill="#0f172a">R2</text>
+    <text x="448" y="218" font-size="11" font-weight="600" fill="#64748b">10 kΩ</text>
+    <line x1="430" y1="230" x2="430" y2="290" stroke="#334155" stroke-width="2"/>
+    <circle cx="430" cy="290" r="4" fill="#0f172a"/>
+
+    <!-- Parallel Bus line for Wrong Keys W1-W4 -->
+    <line x1="430" y1="290" x2="430" y2="440" stroke="#334155" stroke-width="2"/>
+    <line x1="330" y1="440" x2="470" y2="440" stroke="#334155" stroke-width="2"/>
+
+    <rect x="340" y="405" width="120" height="24" rx="4" fill="#fef2f2" stroke="#ef4444" stroke-width="1"/>
+    <text x="400" y="421" font-size="11" font-weight="700" fill="#b91c1c" text-anchor="middle">TRAP KEYS (PARALLEL)</text>
+
+    <!-- W1 Switch -->
+    <line x1="340" y1="440" x2="340" y2="475" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="340" cy="475" r="3" fill="#0f172a"/>
+    <line x1="340" y1="475" x2="350" y2="495" stroke="#ef4444" stroke-width="2"/>
+    <circle cx="340" cy="505" r="3" fill="#0f172a"/>
+    <line x1="340" y1="505" x2="340" y2="550" stroke="#334155" stroke-width="1.5"/>
+    <text x="355" y="490" font-size="11" font-weight="700" fill="#b91c1c">W1</text>
+
+    <!-- W2 Switch -->
+    <line x1="380" y1="440" x2="380" y2="475" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="380" cy="475" r="3" fill="#0f172a"/>
+    <line x1="380" y1="475" x2="390" y2="495" stroke="#ef4444" stroke-width="2"/>
+    <circle cx="380" cy="505" r="3" fill="#0f172a"/>
+    <line x1="380" y1="505" x2="380" y2="550" stroke="#334155" stroke-width="1.5"/>
+    <text x="395" y="490" font-size="11" font-weight="700" fill="#b91c1c">W2</text>
+
+    <!-- W3 Switch -->
+    <line x1="420" y1="440" x2="420" y2="475" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="420" cy="475" r="3" fill="#0f172a"/>
+    <line x1="420" y1="475" x2="430" y2="495" stroke="#ef4444" stroke-width="2"/>
+    <circle cx="420" cy="505" r="3" fill="#0f172a"/>
+    <line x1="420" y1="505" x2="420" y2="550" stroke="#334155" stroke-width="1.5"/>
+    <text x="435" y="490" font-size="11" font-weight="700" fill="#b91c1c">W3</text>
+
+    <!-- W4 Switch -->
+    <line x1="460" y1="440" x2="460" y2="475" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="460" cy="475" r="3" fill="#0f172a"/>
+    <line x1="460" y1="475" x2="470" y2="495" stroke="#ef4444" stroke-width="2"/>
+    <circle cx="460" cy="505" r="3" fill="#0f172a"/>
+    <line x1="460" y1="505" x2="460" y2="550" stroke="#334155" stroke-width="1.5"/>
+    <text x="475" y="490" font-size="11" font-weight="700" fill="#b91c1c">W4</text>
+
+    <!-- Common ground bus for W1-W4 -->
+    <line x1="330" y1="550" x2="470" y2="550" stroke="#334155" stroke-width="2"/>
+    <line x1="400" y1="550" x2="400" y2="740" stroke="#334155" stroke-width="2"/>
+    <circle cx="400" cy="740" r="4" fill="#2563eb"/>
+  </g>
+
+  <!-- ==================== CONTROL VOLTAGE DECOUPLING: PIN 5 ==================== -->
+  <g id="control-cap-c2">
+    <line x1="480" y1="520" x2="480" y2="620" stroke="#334155" stroke-width="2"/>
+    <!-- Capacitor C2 -->
+    <line x1="465" y1="620" x2="495" y2="620" stroke="#0f172a" stroke-width="2.5"/>
+    <line x1="465" y1="630" x2="495" y2="630" stroke="#0f172a" stroke-width="2.5"/>
+    <line x1="480" y1="630" x2="480" y2="740" stroke="#334155" stroke-width="2"/>
+    <circle cx="480" cy="740" r="4" fill="#2563eb"/>
+    <text x="495" y="622" font-size="12" font-weight="700" fill="#0f172a">C2</text>
+    <text x="495" y="638" font-size="10" font-weight="600" fill="#64748b">10 nF (103)</text>
+  </g>
+
+  <!-- ==================== TIMING NETWORK: PINS 6 & 7 ==================== -->
+  <g id="timing-subsystem">
+    <!-- Common node joining Pin 6 & Pin 7 -->
+    <line x1="820" y1="310" x2="820" y2="370" stroke="#334155" stroke-width="2"/>
+    <line x1="820" y1="340" x2="850" y2="340" stroke="#334155" stroke-width="2"/>
+    <circle cx="850" cy="340" r="4" fill="#0f172a"/>
+
+    <!-- Timing Resistor R3 (47 kΩ) to +5V -->
+    <line x1="850" y1="120" x2="850" y2="210" stroke="#334155" stroke-width="2"/>
+    <circle cx="850" cy="120" r="4" fill="#dc2626"/>
+    <!-- Resistor Box -->
+    <rect x="840" y="210" width="20" height="60" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+    <text x="870" y="235" font-size="13" font-weight="700" fill="#0f172a">R3</text>
+    <text x="870" y="252" font-size="12" font-weight="600" fill="#64748b">47 kΩ</text>
+    <line x1="850" y1="270" x2="850" y2="340" stroke="#334155" stroke-width="2"/>
+
+    <!-- Timing Capacitor C1 (100 µF Electrolytic) to GND -->
+    <line x1="850" y1="340" x2="850" y2="440" stroke="#334155" stroke-width="2"/>
+    <!-- Electrolytic Capacitor Symbol -->
+    <line x1="835" y1="440" x2="865" y2="440" stroke="#0f172a" stroke-width="3"/>
+    <path d="M 835 452 Q 850 447 865 452" fill="none" stroke="#0f172a" stroke-width="3"/>
+    <text x="823" y="438" font-size="14" font-weight="700" fill="#dc2626">+</text>
+    <line x1="850" y1="452" x2="850" y2="740" stroke="#334155" stroke-width="2"/>
+    <circle cx="850" cy="740" r="4" fill="#2563eb"/>
+    <text x="875" y="445" font-size="13" font-weight="700" fill="#0f172a">C1</text>
+    <text x="875" y="462" font-size="12" font-weight="600" fill="#64748b">100 µF (16V)</text>
+    <text x="875" y="478" font-size="10" font-weight="500" fill="#94a3b8">Electrolytic</text>
+
+    <!-- Timing Formula annotation box -->
+    <rect x="800" y="520" width="160" height="52" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="880" y="542" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">T ≈ 1.1 × R3 × C1</text>
+    <text x="880" y="560" font-size="11" font-weight="600" fill="#2563eb" text-anchor="middle">T ≈ 5.17 Seconds</text>
+  </g>
+
+  <!-- ==================== OUTPUT INDICATOR: PIN 3 ==================== -->
+  <g id="output-subsystem">
+    <!-- Current Limiting Resistor R4 (330 Ω) -->
+    <line x1="880" y1="470" x2="930" y2="470" stroke="#334155" stroke-width="2"/>
+    <!-- Resistor Box -->
+    <rect x="930" y="460" width="45" height="20" fill="#f1f5f9" stroke="#0f172a" stroke-width="2"/>
+    <text x="952" y="450" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle">R4 (330 Ω)</text>
+    <line x1="975" y1="470" x2="1010" y2="470" stroke="#334155" stroke-width="2"/>
+
+    <!-- LED Symbol -->
+    <!-- Triangle Anode (+) -->
+    <polygon points="1010,460 1010,480 1026,470" fill="#16a34a" stroke="#16a34a" stroke-width="1.5"/>
+    <!-- Bar Cathode (-) -->
+    <line x1="1026" y1="458" x2="1026" y2="482" stroke="#0f172a" stroke-width="2.5"/>
+    <!-- Light Emission Arrows -->
+    <line x1="1016" y1="455" x2="1026" y2="442" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="1024" y1="458" x2="1034" y2="445" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <!-- Label -->
+    <text x="1035" y="475" font-size="12" font-weight="700" fill="#15803d">LED</text>
+    <text x="1035" y="490" font-size="10" font-weight="500" fill="#64748b">Lock Indicator</text>
+
+    <!-- Return to Ground -->
+    <line x1="1026" y1="470" x2="1026" y2="740" stroke="#334155" stroke-width="2"/>
+    <circle cx="1026" cy="740" r="4" fill="#2563eb"/>
+  </g>
+
+  <!-- ==================== LEGEND & NOTES ==================== -->
+  <g id="notes" transform="translate(60, 680)">
+    <rect x="0" y="0" width="130" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="10" y="16" font-size="10" font-weight="700" fill="#0f172a">Wiring Legend:</text>
+    <text x="10" y="30" font-size="9" font-weight="500" fill="#64748b">K1-K4: Series (AND)</text>
+  </g>
+</svg>

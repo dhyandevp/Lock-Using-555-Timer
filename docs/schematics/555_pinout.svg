@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%" style="background:#ffffff; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.12" flood-color="#0f172a"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#ffffff" />
+
+  <!-- Section 1: DIP-8 555 Pinout -->
+  <g transform="translate(40, 30)">
+    <text x="180" y="24" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">555 Timer DIP-8 Physical Pinout</text>
+    <text x="180" y="44" font-size="12" font-weight="500" fill="#64748b" text-anchor="middle">Top View (Notch Facing Upward)</text>
+
+    <!-- IC Chip Body -->
+    <rect x="90" y="70" width="180" height="340" rx="12" fill="#1e293b" stroke="#0f172a" stroke-width="2" filter="url(#shadow)"/>
+    <!-- Top Notch -->
+    <path d="M 160 70 A 20 20 0 0 0 200 70" fill="#0f172a" stroke="#475569" stroke-width="2"/>
+    <!-- Pin 1 Dot Marker -->
+    <circle cx="115" cy="115" r="5" fill="#94a3b8"/>
+
+    <!-- Left Pins (1 to 4) -->
+    <!-- Pin 1 -->
+    <rect x="50" y="105" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="35" y="120" font-size="13" font-weight="700" fill="#2563eb" text-anchor="end">1</text>
+    <text x="105" y="120" font-size="13" font-weight="700" fill="#f8fafc">GND</text>
+    <text x="35" y="135" font-size="10" font-weight="500" fill="#64748b" text-anchor="end">Ground (0V)</text>
+
+    <!-- Pin 2 -->
+    <rect x="50" y="185" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="35" y="200" font-size="13" font-weight="700" fill="#2563eb" text-anchor="end">2</text>
+    <text x="105" y="200" font-size="13" font-weight="700" fill="#f8fafc">TRIG</text>
+    <text x="35" y="215" font-size="10" font-weight="500" fill="#64748b" text-anchor="end">Trigger (K1-K4)</text>
+
+    <!-- Pin 3 -->
+    <rect x="50" y="265" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="35" y="280" font-size="13" font-weight="700" fill="#2563eb" text-anchor="end">3</text>
+    <text x="105" y="280" font-size="13" font-weight="700" fill="#f8fafc">OUT</text>
+    <text x="35" y="295" font-size="10" font-weight="500" fill="#64748b" text-anchor="end">Output (LED)</text>
+
+    <!-- Pin 4 -->
+    <rect x="50" y="345" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="35" y="360" font-size="13" font-weight="700" fill="#2563eb" text-anchor="end">4</text>
+    <text x="105" y="360" font-size="13" font-weight="700" fill="#f8fafc">RESET</text>
+    <text x="35" y="375" font-size="10" font-weight="500" fill="#64748b" text-anchor="end">Trap (W1-W4)</text>
+
+    <!-- Right Pins (8 to 5) -->
+    <!-- Pin 8 -->
+    <rect x="270" y="105" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="325" y="120" font-size="13" font-weight="700" fill="#dc2626">8</text>
+    <text x="255" y="120" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">VCC</text>
+    <text x="325" y="135" font-size="10" font-weight="500" fill="#64748b">+5V Rail</text>
+
+    <!-- Pin 7 -->
+    <rect x="270" y="185" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="325" y="200" font-size="13" font-weight="700" fill="#dc2626">7</text>
+    <text x="255" y="200" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">DISCH</text>
+    <text x="325" y="215" font-size="10" font-weight="500" fill="#64748b">Discharge</text>
+
+    <!-- Pin 6 -->
+    <rect x="270" y="265" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="325" y="280" font-size="13" font-weight="700" fill="#dc2626">6</text>
+    <text x="255" y="280" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">THRESH</text>
+    <text x="325" y="295" font-size="10" font-weight="500" fill="#64748b">Threshold (RC)</text>
+
+    <!-- Pin 5 -->
+    <rect x="270" y="345" width="40" height="20" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="1.5"/>
+    <text x="325" y="360" font-size="13" font-weight="700" fill="#dc2626">5</text>
+    <text x="255" y="360" font-size="13" font-weight="700" fill="#f8fafc" text-anchor="end">CTRL</text>
+    <text x="325" y="375" font-size="10" font-weight="500" fill="#64748b">Control (10nF)</text>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="470" y1="40" x2="470" y2="460" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Section 2: 4-Pin Tactile Switch Internal Bridging Diagram -->
+  <g transform="translate(510, 30)">
+    <text x="170" y="24" font-size="18" font-weight="700" fill="#0f172a" text-anchor="middle">Tactile Switch Bridging Rule</text>
+    <text x="170" y="44" font-size="12" font-weight="500" fill="#64748b" text-anchor="middle">Understanding 4-Pin Pushbutton Internal Connections</text>
+
+    <!-- Switch Body -->
+    <rect x="60" y="80" width="220" height="220" rx="16" fill="#f8fafc" stroke="#334155" stroke-width="2" filter="url(#shadow)"/>
+    <!-- Button Center Cap -->
+    <circle cx="170" cy="190" r="55" fill="#0f172a" stroke="#475569" stroke-width="3"/>
+    <text x="170" y="195" font-size="12" font-weight="600" fill="#94a3b8" text-anchor="middle">PUSH</text>
+
+    <!-- Switch Pins -->
+    <!-- Pin 1 (Top Left) -->
+    <rect x="25" y="105" width="35" height="16" rx="2" fill="#94a3b8"/>
+    <text x="75" y="118" font-size="12" font-weight="700" fill="#0f172a">A1</text>
+
+    <!-- Pin 2 (Bottom Left) -->
+    <rect x="25" y="255" width="35" height="16" rx="2" fill="#94a3b8"/>
+    <text x="75" y="268" font-size="12" font-weight="700" fill="#0f172a">B1</text>
+
+    <!-- Pin 3 (Top Right) -->
+    <rect x="280" y="105" width="35" height="16" rx="2" fill="#94a3b8"/>
+    <text x="265" y="118" font-size="12" font-weight="700" fill="#0f172a" text-anchor="end">A2</text>
+
+    <!-- Pin 4 (Bottom Right) -->
+    <rect x="280" y="255" width="35" height="16" rx="2" fill="#94a3b8"/>
+    <text x="265" y="268" font-size="12" font-weight="700" fill="#0f172a" text-anchor="end">B2</text>
+
+    <!-- Internal Short Indicators (Horizontal dashed lines) -->
+    <line x1="90" y1="113" x2="250" y2="113" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 3"/>
+    <line x1="90" y1="263" x2="250" y2="263" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 3"/>
+    <text x="170" y="105" font-size="10" font-weight="700" fill="#ef4444" text-anchor="middle">INTERNALLY SHORTED PAIR</text>
+    <text x="170" y="280" font-size="10" font-weight="700" fill="#ef4444" text-anchor="middle">INTERNALLY SHORTED PAIR</text>
+
+    <!-- Safe Wiring Recommendation Box -->
+    <rect x="20" y="325" width="300" height="120" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+    <text x="35" y="348" font-size="13" font-weight="700" fill="#166534">Recommended Wiring Practice:</text>
+    <text x="35" y="372" font-size="11" font-weight="500" fill="#14532d">• Wire diagonally (A1 to B2 or B1 to A2).</text>
+    <text x="35" y="394" font-size="11" font-weight="500" fill="#14532d">• Guarantees open circuit until pressed.</text>
+    <text x="35" y="416" font-size="11" font-weight="500" fill="#14532d">• Never wire across horizontal pairs (A1 to A2)</text>
+    <text x="45" y="432" font-size="11" font-weight="500" fill="#dc2626">  which creates a permanent short-circuit!</text>
+  </g>
+</svg>
