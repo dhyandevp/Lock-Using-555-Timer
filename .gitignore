@@ -17,3 +17,7 @@ Thumbs.db
 # Temporary / Log files
 *.log
 /tmp/
+
+# External local folders
+smartcity-main/
+

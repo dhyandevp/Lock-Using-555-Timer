@@ -14,7 +14,64 @@ This guide walks through assembling the **4-Key Combination Lock Using 555 Timer
 
 ---
 
-## ⚠️ Critical Rule 1: Tactile Switch Bridging
+## 🗺️ Architectural Breadboard Wiring Map
+
+![Breadboard Wiring Map](./schematics/breadboard_wiring_map.svg)
+
+*(Vector map available at [`docs/schematics/breadboard_wiring_map.svg`](./schematics/breadboard_wiring_map.svg))*
+
+---
+
+## 📍 Row-by-Row Breadboard Coordinate Table (MB-102 Standard)
+
+Follow this exact connection map row-by-row on any standard 830-point solderless breadboard:
+
+| Row / Location | From Socket | To Socket | Component / Jumper Wire | Functional Description |
+| :--- | :--- | :--- | :--- | :--- |
+| **Power Distribution** | Top Red Rail (+) Left | Top Red Rail (+) Right | Red Jumper Wire | Bridges split power rail across row 30 break |
+| **Power Distribution** | Top Blue Rail (-) Left | Top Blue Rail (-) Right | Blue Jumper Wire | Bridges split ground rail across row 30 break |
+| **Power Distribution** | Top Red Rail (+) | Bottom Red Rail (+) | Red Jumper Wire | Distributes +5V to both sides of breadboard |
+| **Power Distribution** | Top Blue Rail (-) | Bottom Blue Rail (-) | Blue Jumper Wire | Distributes common GND to both sides |
+| **Rail Decoupling** | Top Red Rail (+) | Top Blue Rail (-) | $C_3$ ($100\text{ nF}$ Ceramic, code `104`) | High-frequency rail decoupling across supply |
+| **Row 10 (IC Ground)** | Row 10, Col E | — | NE555 IC Pin 1 | IC Ground terminal |
+| **Row 10** | Row 10, Col D | Top Blue Rail (-) | Black/Blue Jumper Wire | Connects Pin 1 to Ground |
+| **Row 10 (IC Power)** | Row 10, Col F | — | NE555 IC Pin 8 | IC +5V ($V_{CC}$) supply terminal |
+| **Row 10** | Row 10, Col G | Bottom Red Rail (+) | Red Jumper Wire | Connects Pin 8 to +5V |
+| **Row 11 (Trigger)** | Row 11, Col E | — | NE555 IC Pin 2 | Trigger sensing input |
+| **Row 11** | Top Red Rail (+) | Row 11, Col D | $R_1$ ($10\text{ k}\Omega$, Brown-Black-Orange) | Pull-up resistor maintaining Pin 2 at +5V |
+| **Row 11** | Row 11, Col C | Row 24, Col C | Yellow Jumper Wire | Routes Trigger node to Switch $K_1$ input |
+| **Row 11 (Discharge)**| Row 11, Col F | — | NE555 IC Pin 7 | Internal discharge transistor collector |
+| **Row 12 (Threshold)**| Row 12, Col F | — | NE555 IC Pin 6 | Upper comparator threshold input |
+| **Row 11–12 (Tie)** | Row 11, Col G | Row 12, Col G | Short Jumper Wire | Ties Pin 6 and Pin 7 together |
+| **Row 12** | Bottom Red Rail (+) | Row 12, Col H | $R_3$ ($47\text{ k}\Omega$, Yellow-Violet-Orange) | Timing resistor charging $C_1$ ($T \approx 1.1 R_3 C_1$) |
+| **Row 12** | Row 12, Col I | Bottom Blue Rail (-) | $C_1$ ($100\ \mu\text{F}$ Electrolytic) | Timing capacitor (Long lead to Row 12, stripe to GND) |
+| **Row 12 (Output)** | Row 12, Col E | — | NE555 IC Pin 3 | Push-pull totem pole output |
+| **Row 12** | Row 12, Col D | Row 14, Col D | $R_4$ ($330\ \Omega$, Orange-Orange-Brown) | Current-limiting resistor for indicator LED |
+| **Row 14** | Row 14, Col C | Top Blue Rail (-) | Indicator LED (Cyan/Blue) | Anode (long leg) at Row 14, Cathode (flat rim) to GND |
+| **Row 13 (Control)** | Row 13, Col F | — | NE555 IC Pin 5 | Internal $\frac{2}{3} V_{CC}$ ladder tap |
+| **Row 13** | Row 13, Col H | Bottom Blue Rail (-) | $C_2$ ($10\text{ nF}$ Ceramic, code `103`) | Decoupling capacitor filtering Pin 5 to GND |
+| **Row 13 (Reset)** | Row 13, Col E | — | NE555 IC Pin 4 | Active-low Master Reset input |
+| **Row 13** | Top Red Rail (+) | Row 13, Col D | $R_2$ ($10\text{ k}\Omega$, Brown-Black-Orange) | Pull-up resistor maintaining Pin 4 at +5V |
+| **Row 13** | Row 13, Col C | Row 42, Col F | Orange/White Jumper Wire | Routes Reset line to Trap Key Bus ($W_1–W_4$) |
+| **Row 24–26 (Key 1)** | Row 24, Col C & E | Row 26, Col C & E | Tactile Switch $K_1$ (SPST) | Combination Key 1 (Wired diagonally: 24C to 26E) |
+| **Row 26–28** | Row 26, Col E | Row 28, Col C | Jumper Wire | Series link from $K_1$ output to $K_2$ input |
+| **Row 28–30 (Key 2)** | Row 28, Col C & E | Row 30, Col C & E | Tactile Switch $K_2$ (SPST) | Combination Key 2 (Wired diagonally: 28C to 30E) |
+| **Row 30–32** | Row 30, Col E | Row 32, Col C | Jumper Wire | Series link from $K_2$ output to $K_3$ input |
+| **Row 32–34 (Key 3)** | Row 32, Col C & E | Row 34, Col C & E | Tactile Switch $K_3$ (SPST) | Combination Key 3 (Wired diagonally: 32C to 34E) |
+| **Row 34–36** | Row 34, Col E | Row 36, Col C | Jumper Wire | Series link from $K_3$ output to $K_4$ input |
+| **Row 36–38 (Key 4)** | Row 36, Col C & E | Row 38, Col C & E | Tactile Switch $K_4$ (SPST) | Combination Key 4 (Wired diagonally: 36C to 38E) |
+| **Row 38** | Row 38, Col E | Top Blue Rail (-) | Blue/Black Jumper Wire | Final Ground return (**Only $K_4$ connects to GND!**) |
+| **Row 42–44 (Trap 1)**| Row 42, Col F & H | Row 44, Col F & H | Tactile Switch $W_1$ (SPST) | Trap Key 1 (Wired diagonally: 42F to 44H) |
+| **Row 44** | Row 44, Col H | Bottom Blue Rail (-) | Blue Jumper Wire | Sinks $W_1$ to Ground when pressed |
+| **Row 42–46 (Bus)** | Row 42, Col F | Row 46, Col F | Jumper Wire | Extends Pin 4 Reset Bus to Trap Key $W_2$ |
+| **Row 46–48 (Trap 2)**| Row 46, Col F & H | Row 48, Col F & H | Tactile Switch $W_2$ (SPST) | Trap Key 2 (Wired diagonally: 46F to 48H) |
+| **Row 48** | Row 48, Col H | Bottom Blue Rail (-) | Blue Jumper Wire | Sinks $W_2$ to Ground when pressed |
+| **Row 46–50 (Bus)** | Row 46, Col F | Row 50, Col F | Jumper Wire | Extends Pin 4 Reset Bus to Trap Key $W_3$ |
+| **Row 50–52 (Trap 3)**| Row 50, Col F & H | Row 52, Col F & H | Tactile Switch $W_3$ (SPST) | Trap Key 3 (Wired diagonally: 50F to 52H) |
+| **Row 52** | Row 52, Col H | Bottom Blue Rail (-) | Blue Jumper Wire | Sinks $W_3$ to Ground when pressed |
+| **Row 50–54 (Bus)** | Row 50, Col F | Row 54, Col F | Jumper Wire | Extends Pin 4 Reset Bus to Trap Key $W_4$ |
+| **Row 54–56 (Trap 4)**| Row 54, Col F & H | Row 56, Col F & H | Tactile Switch $W_4$ (SPST) | Trap Key 4 (Wired diagonally: 54F to 56H) |
+| **Row 56** | Row 56, Col H | Bottom Blue Rail (-) | Blue Jumper Wire | Sinks $W_4$ to Ground when pressed |
 
 Standard 4-pin tactile pushbuttons (`6x6 mm` DIP) can be confusing for beginners because they have 4 legs but only perform single-pole single-throw (SPST) switching.
 
