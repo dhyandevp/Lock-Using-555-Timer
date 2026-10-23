@@ -18,6 +18,3 @@ Thumbs.db
 *.log
 /tmp/
 
-# External local folders
-smartcity-main/
-
